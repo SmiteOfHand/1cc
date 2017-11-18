@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>1CC Marathon</title>
+  <link rel="shortcut icon" href="img/favicon.ico" />
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans|Ceviche+One|Yantramanav" rel="stylesheet">
+  <style>
+    /* clearfix */
+    .group:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .game-tile {
+      max-width: 308px;
+
+      background-color: #312525;
+      padding: .5em;
+      margin-bottom: 1em;
+      position:relative;
+    }
+
+    .game-marathon {
+      font-size: .9em;
+      font-weight: bold;
+
+      color: #C0392B;
+      padding: 2px;
+
+      /* -webkit-transform: translateX(0) rotate(40deg);
+      transform: translateX(0) rotate(40deg); */
+
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .game-info-top {
+      margin-bottom: .5em;
+    }
+
+    .game-info-top h2, h3 {
+      font-family: 'Yantramanav', sans-serif;
+    }
+
+
+    .game-info-top h2 {
+      color: #dcd949;
+      font-size: 1.15em;
+      font-weight: bold;
+    }
+
+    .game-info-top h3 {
+      color: white;
+      font-size: .9em;
+    }
+
+    .game-info {
+      margin-top: .5em;
+      position: relative;
+    }
+
+    .game-info h3 {
+      color: #dcd949;
+      display: inline;
+      font-size: 1.5em;
+      position: absolute;
+      top:4px;
+      right:0;
+      /* font-family: 'Bubblegum Sans', cursive; */
+      font-family: 'Ceviche One', cursive;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    .game-img {
+      width:308px;
+      height: 229px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .vid-icon {
+      height:32px;
+    }
+
+    .icon-small {
+      height:16px;
+    }
+
+    .icon-med {
+      height:24px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><img class="icon-small" src="img/coins.png">1CC Marathon</h1>
+    <div id="divider"></div>
+    <nav>
+      <!-- <select name="year">
+        <option value="2017" selected>2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+      </select> -->
+      <form action=""> <!-- code to filter games -->
+        <input type="text" id="searchbox" name="search" placeholder="Search (Game, Dev, Player)">
+        <!-- <input type="submit" value="🔍"> -->
+        <!-- <a href="#">🔍</a> -->
+      </form>
+    </nav>
+  </header>
+  <section>
+    <article class='videos-container'></article>
+  </section>
+</body>
+<script src="js/data.js"></script>
+<script>
+  // STEP ONE
+  // Generate default list from data above
+  const videosContainer = document.querySelector('.videos-container');
+  const searchBox = document.querySelector('#searchbox');
+  let activeVideos = [];
+
+  // function strip(bandName) {
+  //   return bandName.replace(/^(a |the |an )/i, '').trim();
+  // }
+
+  // const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+
+  // document.querySelector('#bands').innerHTML =
+  //   sortedBands
+  //     .map(band => `<li>${band}</li>`)
+  //     .join('');
+
+  function generateVideos(vids) {
+    videosContainer.innerHTML = vids
+      .map(video => {
+        const yt = (video.youtube.length > 0) ? `<a href='https://www.youtube.com/watch?v=${video.youtube}' target="_blank"><img class="vid-icon" src="img/yt_icon_rgb.png"></a>` : '';
+        const tw = (video.twitchv.length > 0) ? `<a href='https://www.twitch.tv/videos/${video.twitchv}?t=${video.twitcht}' target="_blank"><img src="img/GlitchBadge_Purple_32px.png"></a>` : '';
+        const onecc = video.onecc ? '🎅' : '☠️';
+        return `<div class="game-tile">
+                    <div class="game-info-top">
+                      <h2>${video.game}</h2>
+                      <h3>${video.year} • ${video.dev}</h3>
+                    </div>
+                    <span class="game-marathon">M${video.marathon}</span>
+                    <div class="game-img" data-img="${video.title}" data-gif="${video.gif}"></div>
+                    <div class="game-info">
+                      ${tw}
+                      ${yt}
+                      <h3>${onecc} 🕹️ ${video.player}</h3>
+                    </div>
+                  </div>`;
+          })
+      .join('');
+
+      wireEvents();
+  }
+
+  function wireEvents() {
+    const gameTile = Array.from(document.querySelectorAll('.game-img'));
+
+    function tileMouseOver() {
+      const src = this.getAttribute('data-gif');
+      this.style.backgroundImage="url('" + src + "')";
+    }
+    function tileMouseOut() {
+      const src = this.getAttribute('data-img');
+      this.style.backgroundImage="url('" + src + "')";
+    }
+
+    // EVENTS
+    gameTile.forEach(tile => tile.addEventListener('mouseover', tileMouseOver));
+    gameTile.forEach(tile => tile.addEventListener('mouseout', tileMouseOut));
+    gameTile.forEach(tile => {
+      // This is dumb. Should be able to call tileMouseOut directly. Figure it out, dummy.
+      const src = tile.getAttribute('data-img');
+      tile.style.backgroundImage="url('" + src + "')";
+    });
+  }
+
+  // Plain example
+  activeVideos = videos;
+
+  // 1cc example
+  //activeVideos = videos.filter(v => v.onecc);
+
+  // Search example
+  //activeVideos = videos.filter(v => v.game.toLowerCase().includes('metal'));
+
+  // Complex search example
+  let search = 'a';
+  activeVideos = videos.filter(v => v.game.toLowerCase().includes(search) || v.dev.toLowerCase().includes(search) || v.player.toLowerCase().includes(search) || v.alttext.toLowerCase().includes(search));
+
+  generateVideos(activeVideos);
+
+  function searchVideos() {
+    if(this.value.length == 0) {
+      activeVideos = videos;
+    } else {
+      //if(this.value.length < 3) return;
+
+      const s = this.value.toLowerCase();
+      activeVideos = videos.filter(v => v.game.toLowerCase().includes(s) || v.dev.toLowerCase().includes(s) || v.player.toLowerCase().includes(s) || v.alttext.toLowerCase().includes(s));
+
+    }
+    generateVideos(activeVideos);
+  }
+  
+  searchBox.addEventListener('change', searchVideos);
+  searchBox.addEventListener('keyup', searchVideos);
+
+  //searchBox.addEventListener(type: DOMString, callback: EventListener, capture?: boolean)
+
+  // const dev = Object.assign({}, wes);
+  // const dev2 = JSON.parse(JSON.stringify(wes));
+</script>
+</html>
