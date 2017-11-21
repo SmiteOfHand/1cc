@@ -5,22 +5,22 @@
   <title>1CC Marathon</title>
   <link rel="shortcut icon" href="img/favicon.ico" />
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans|Ceviche+One|Yantramanav" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans|Ceviche+One|Yantramanav|Russo+One" rel="stylesheet">
   <style>
-    /* clearfix */
-    .group:after {
-      content: "";
-      display: table;
-      clear: both;
+    .hidden {
+      display:none;
     }
 
     .game-tile {
       max-width: 308px;
 
-      background-color: #312525;
+      background-color: #121212;
       padding: .5em;
       margin-bottom: 1em;
       position:relative;
+
+      -webkit-box-shadow: 0 5px 10px -1px #949494;
+      box-shadow: 0 5px 10px -1px #190202;
     }
 
     .game-marathon {
@@ -97,16 +97,25 @@
 </head>
 <body>
   <header>
-    <h1><img class="icon-small" src="img/coins.png">1CC Marathon</h1>
-    <div id="divider"></div>
+    <div class="site-title">
+      <img class="icon-small" src="img/coins.png">
+      <h1>1CC Marathon</h1>
+      <div id="divider"></div>
+    </div>
     <nav>
-      <!-- <select name="year">
-        <option value="2017" selected>2017</option>
-        <option value="2016">2016</option>
-        <option value="2015">2015</option>
-      </select> -->
       <form action=""> <!-- code to filter games -->
-        <input type="text" id="searchbox" name="search" placeholder="Search (Game, Dev, Player)">
+        <input type="text" id="searchbox" class="search" name="search" maxlength="16" placeholder="Search (Game, Dev, Player)">
+        <!-- <select name="year">
+          <option value="2017" selected>2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+        </select> -->
+        <ul class="filters">
+          <li>
+            <input id="spoilers" class="spoilers" type="checkbox">
+            <label for="spoilers">Spoilers</label>
+          </li>
+        </ul>
         <!-- <input type="submit" value="🔍"> -->
         <!-- <a href="#">🔍</a> -->
       </form>
@@ -122,6 +131,7 @@
   // Generate default list from data above
   const videosContainer = document.querySelector('.videos-container');
   const searchBox = document.querySelector('#searchbox');
+  const spoilers = document.querySelector('#spoilers');
   let activeVideos = [];
 
   // function strip(bandName) {
@@ -140,7 +150,8 @@
       .map(video => {
         const yt = (video.youtube.length > 0) ? `<a href='https://www.youtube.com/watch?v=${video.youtube}' target="_blank"><img class="vid-icon" src="img/yt_icon_rgb.png"></a>` : '';
         const tw = (video.twitchv.length > 0) ? `<a href='https://www.twitch.tv/videos/${video.twitchv}?t=${video.twitcht}' target="_blank"><img src="img/GlitchBadge_Purple_32px.png"></a>` : '';
-        const onecc = video.onecc ? '🎅' : '☠️';
+
+        const onecc = video.onecc ? `<span class="onecc${spoilers.checked ? '' : ' hidden'}">🎅</span>` : `<span class="onecc${spoilers.checked ? '' : ' hidden'}">☠️</span>`;
         return `<div class="game-tile">
                     <div class="game-info-top">
                       <h2>${video.game}</h2>
@@ -212,6 +223,13 @@
   
   searchBox.addEventListener('change', searchVideos);
   searchBox.addEventListener('keyup', searchVideos);
+  spoilers.addEventListener('click', function() {
+    const onecc = document.querySelectorAll('.onecc');
+
+    onecc.forEach(one => {
+      one.classList.toggle('hidden');
+    })
+  });
 
   //searchBox.addEventListener(type: DOMString, callback: EventListener, capture?: boolean)
 
