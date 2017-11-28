@@ -1,4 +1,5 @@
-const videos = [
+const videos = {
+"2017": [
       { player: 'Macaw45', game: 'Osman (Cannon-Dancer)', dev: 'Mitchell Corporation', year: 1996, marathon: 2017, day: 1, title: 'title/osman.png', gif: 'gif/2017/01_Osman.gif', twitchv: '200391245', twitcht: '13m55s', youtube: '', alttext: '', onecc: false },
       { player: 'Macaw45', game: 'The Lord of King (Astynax)', dev: 'Aicom', year: 1989, marathon: 2017, day: 1, title: 'title/lordofk.png', gif: 'gif/2017/02_LordOfKing.gif', twitchv: '200391245', twitcht: '38m35s', youtube: 'w6SJSdd5LBU', alttext: '', onecc: true },
       { player: 'Macaw45', game: 'ThunderFox', dev: 'Taito', year: 1990, marathon: 2017, day: 1, title: 'title/thundfox.png', gif: 'gif/2017/03_ThunderFox.gif', twitchv: '200391245', twitcht: '01h03m00s', youtube: '',  alttext: '', onecc: true },
@@ -30,4 +31,19 @@ const videos = [
       { player: '', game: '', dev: '', year: 1900, marathon: 2017, day: 1, title: 'title/', gif: 'gif/2017/', onecc: true },
       { player: '', game: '', dev: '', year: 1900, marathon: 2017, day: 1, title: 'title/', gif: 'gif/2017/', onecc: true },
       { player: '', game: '', dev: '', year: 1900, marathon: 2017, day: 1, title: 'title/', gif: 'gif/2017/', onecc: true },*/
-    ];
+    ],
+"2016": [
+      { player: 'Macaw45', game: 'Osman (Cannon-Dancer)', dev: 'Mitchell Corporation', year: 1996, marathon: 2016, day: 1, title: 'title/underc.png', gif: 'gif/2016/under.gif', twitchv: '200391245', twitcht: '13m55s', youtube: '', alttext: '', onecc: false },
+      { player: 'Macaw45', game: 'The Lord of King (Astynax)', dev: 'Aicom', year: 1989, marathon: 2016, day: 1, title: 'title/underc.png', gif: 'gif/2016/under.gif', twitchv: '200391245', twitcht: '38m35s', youtube: 'w6SJSdd5LBU', alttext: '', onecc: true },
+      { player: 'Macaw45', game: 'ThunderFox', dev: 'Taito', year: 1990, marathon: 2016, day: 1, title: 'title/underc.png', gif: 'gif/2016/under.gif', twitchv: '200391245', twitcht: '01h03m00s', youtube: '',  alttext: '', onecc: true }
+    ],
+"2015": [
+      { player: 'beeanyew', game: 'Mr. Driller', dev: 'Namco', year: 1999, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '05h14m13s', youtube: '3yYL-o-xs24',  alttext: '', onecc: true },
+      { player: 'ggmaximo', game: 'FixEight', dev: 'Toaplan', year: 1992, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '05h26m11s', youtube: 'QnIPosYTb7I',  alttext: '', onecc: true },
+      { player: 'zallard', game: 'Punch-Out!!', dev: 'Nintendo', year: 1984, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '06h08m35s', youtube: 'ZfGy5ns5YrY',  alttext: '', onecc: true },
+      { player: 'MURPHAGATOR', game: 'OverTop', dev: 'ADK', year: 1996, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '06h29m50s', youtube: 'iu93r2jq7CY',  alttext: '', onecc: true },
+      { player: 'MURPHAGATOR', game: 'Mutation Nation', dev: 'SNK', year: 1992, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '06h39m21s', youtube: 'iVE_mRU_e7I',  alttext: '', onecc: true },
+      { player: 'Sean_AB', game: 'Batsugun Special', dev: 'Toaplan', year: 1993, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '07h07m45s', youtube: 'hjQAWvpVoYI',  alttext: '', onecc: true },
+      { player: 'Cooljay1991', game: 'Metal Slug', dev: 'Nazca', year: 1996, marathon: 2015, day: 1, title: 'title/underc.png', gif: 'gif/2015/under.gif',  twitchv: '200391245', twitcht: '08h07m00s', youtube: 'c3sOj1Dc2Y8',  alttext: 'snk', onecc: true }
+    ]
+};

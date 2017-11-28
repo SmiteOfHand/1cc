@@ -1,0 +1,347 @@
+// --- Base colors ---
+// Reds
+$darkred: #6f2525;
+$deepred: #312525;
+// Blues
+$bluu: #305eb5;
+// Yellows
+$highlighter: #dcd949;
+// Greys
+$prettymuchblack: #121212;
+
+// --- Fonts ---
+$thick-font: 'Russo One', sans-serif;
+$plain-font: 'Yantramanav', sans-serif;
+$bubblegum-font: 'Bubblegum Sans', cursive;
+$cevich-font: 'Ceviche One', cursive;
+
+// --- Sectional Variables ---
+$site-color: white;
+$site-bg-color: $darkred;
+$site-font: $plain-font;
+
+$logo-color: $site-color;
+$logo-bg-color: $deepred;
+$logo-font: $thick-font;
+
+$header-color: $site-color;
+$header-bg-color: $site-bg-color;
+
+$game-tile-color: $site-color;
+$game-tile-title-color: $highlighter;
+$game-tile-player-color: $highlighter;
+$game-tile-bg-color: $prettymuchblack;
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+html {
+  font-family: $site-font;
+  background: $site-bg-color;
+  color: $site-color;
+}
+
+/* Utilities */
+.hidden {
+  display:none;
+}
+.icon-large {
+  height:32px;
+}
+.icon-med {
+  height:24px;
+}
+.icon-small {
+  height:16px;
+}
+.bubblegum {
+  font-family: 'Bubblegum Sans', cursive;
+}
+.russo {
+  font-family: 'Russo One', sans-serif;
+}
+
+/*header style*/
+header {
+  width: 100%;
+  // height: 50px;
+  position: fixed;
+  top: 0;
+  // overflow: hidden;
+  z-index: 100;
+  // line-height: 50px;
+  
+  color: $header-color;
+  background:$header-bg-color;
+}
+header h1 {
+  font-size: 26px;
+  display: inline-block;
+  text-shadow: 1px 2px 1px #000;
+  font-family: $logo-font;
+  padding-left: .5em;
+}
+header h1, .site-title {
+  color: $logo-color;
+  // width: 250px;
+  // display: inline-block;
+  // padding-left: 10px;
+}
+.slant-tab-before, .slant-tab-after {
+  //display: inline;
+  background:$logo-bg-color;
+  height: 50px;
+}
+/*reference: https://www.diviguide.com/section-dividers/*/
+.slant-tab {
+  display: flex;
+  align-items: center;
+}
+.slant-tab-before::before {
+  display:inline-block;
+  // position:absolute;
+  content:'';
+  // top: 40px;
+  width: 30px;
+  height: 50px;
+  // left: 0;
+  // -webkit-transform: translateX(-50%) rotate(60deg);
+  // transform: translateX(-50%) rotate(60deg);
+  -webkit-transform: translateX(-15px) skewX(30deg);
+  transform: translateX(-15px) skewX(30deg);
+  background: $header-bg-color;
+  /*box-shadow: 0 20px 0 #121212;*/
+}
+.slant-tab-after::after {
+  display:inline-block;
+  // position:absolute;
+  content:'';
+  // top: 40px;
+  width: 30px;
+  height: 50px;
+  // left: 245px;
+  // -webkit-transform: translateX(-50%) rotate(-60deg);
+  // transform: translateX(-50%) rotate(-60deg);
+  -webkit-transform: translateX(15px) skewX(-30deg);
+  transform: translateX(15px) skewX(-30deg);
+  background: $header-bg-color;
+  /*box-shadow: 0 20px 0 #121212;*/
+}
+nav, nav select, nav form {
+  // display: inline-block;
+}
+nav {
+  /*margin-left: 75px;*/
+}
+select, input[type=submit] {
+  /* font-size: 1em; */
+  /*color: #747474;*/
+}
+//overflow: hidden breaking stuff
+//https://codepen.io/andornagy/pen/xhiJH
+.nav-dropdown {
+  font-size: 24px;
+  height: 50px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.nav-dropdown a {
+  color: $header-color;
+  text-decoration:none;
+}
+.nav-dropdown-menu a {
+  padding: .5em;
+
+  display:block;
+}
+.nav-dropdown-menu a:hover { 
+  background-color: #000000; 
+}
+.nav-dropdown li {
+  // display: inline-block;
+  // padding: 0 10px;
+  // height: 40px;
+  margin-right: .5em;
+}
+.nav-dropdown li > a:after {
+  font-size: 12px;
+  // position: relative;
+  // top: -3px;
+  // margin-left:3px;
+  content: '▼';
+}
+.nav-dropdown li > a:only-child:after { content: ''; }
+.nav-dropdown ul {
+  display: none;
+  position: absolute;
+  box-shadow: 3px 3px 6px #000;
+  // top: 60px; /* the height of the main nav */
+}
+.nav-dropdown li:hover > ul {
+  display:inherit;
+}
+.nav-dropdown ul li {
+  min-width:120px;
+  float:none;
+  display:list-item;
+  position: relative;
+  margin-right: 0;
+  background:$logo-bg-color;
+}
+input.search {
+  position: relative;
+  top: 2px;
+
+  width: 400px;
+  font-size: 26px;
+  text-align: center;
+  border: none;
+  /*border: 5px solid #c5838a;
+  border-radius: 4px;*/
+
+  background-color: #312525;
+}
+input, textarea {
+  color: #747474;
+}
+.filters {
+  // margin: 0;
+  // padding: 0;
+  // text-align: left;
+  // list-style: none;
+  // display:inline-block;
+  // font-size: 20px;
+}
+.filters input[type=checkbox] {
+  display: none;
+}
+
+.filters input[type=checkbox] + label:before {
+  content: '⬜️';
+  margin-right: 8px;
+}
+.filters input[type=checkbox]:checked + label:before {
+  content: '🔥';
+  margin-right: 6px;
+}
+
+
+header select, 
+header input[type=text], 
+header input[type=submit],
+header a {
+  /*border: none;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  height: 40px;
+  display: inline-block;
+  background-color: #121212;*/
+}
+
+input[type=text] {
+  /*padding: 0;*/
+}
+
+/*search text color*/
+textarea:focus, input:focus {
+  /*color: ##747474;*/
+}
+input, textarea {
+  /*color: #747474;*/
+}
+input::placeholder {
+  /*padding-left: 20px;*/
+  /* font-size: 1.5em; */
+}
+
+/*Main section sytle*/
+
+section {
+  width: 90%;
+  /*height: 100%; removed */
+  margin: 50px auto;
+  /*background-color: #000;*/
+}
+section article {
+  height: 100%;
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+}
+
+.game-tile {
+  max-width: 308px;
+
+  color: $game-tile-color;
+  background-color: $game-tile-bg-color;
+  padding: .5em;
+  margin-bottom: 1em;
+  position:relative;
+
+  -webkit-box-shadow: 0 5px 10px -1px #949494;
+  box-shadow: 0 5px 10px -1px #190202;
+}
+
+.game-marathon {
+  font-size: .9em;
+  font-weight: bold;
+
+  color: #C0392B;
+  padding: 2px;
+
+  /* -webkit-transform: translateX(0) rotate(40deg);
+  transform: translateX(0) rotate(40deg); */
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.game-info-top {
+  margin-bottom: .5em;
+}
+
+.game-info-top h2, h3 {
+  font-family: 'Yantramanav', sans-serif;
+}
+
+
+.game-info-top h2 {
+  color: $game-tile-title-color;
+  font-size: 1.15em;
+  font-weight: bold;
+}
+
+.game-info-top h3 {
+  font-size: .9em;
+}
+
+.game-info {
+  margin-top: .5em;
+  position: relative;
+}
+
+.game-info h3 {
+  color: $game-tile-player-color;
+  display: inline;
+  font-size: 1.2em;
+  position: absolute;
+  top:8px;
+  right:0;
+  /* font-family: 'Bubblegum Sans', cursive; */
+  /*font-family: 'Ceviche One', cursive;*/
+  font-family: 'Russo One', sans-serif;
+  text-shadow: 2px 2px 10px #000;
+}
+
+.game-img {
+  width:308px;
+  height: 229px;
+  background-size: cover;
+  background-position: center;
+}
