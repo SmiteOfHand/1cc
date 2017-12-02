@@ -342,7 +342,13 @@ section article {
 .game-img {
   width:308px;
   height: 229px;
-  background-size: cover;
+  // background-size: cover;
+  // background-position: center;
+  // TODO: Experimental, TEST!!!
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+
+
   background-color: black;
 }

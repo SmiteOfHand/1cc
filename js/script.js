@@ -5,6 +5,7 @@ const searchBox = document.querySelector('#searchbox');
 const spoilers = document.querySelector('#spoilers');
 const yearSelect = document.querySelectorAll('.year-select');
 const yearLabel = document.querySelector('.year-label');
+const searchHelpText = `<p>ALL is search only. Type something in the old search box up there and see what happens.</p>`;
 let activeVideos = [];
 let activeYear = "2017";
 
@@ -82,16 +83,32 @@ activeVideos = videos[activeYear];
 
 generateVideos(activeVideos);
 
+function filterVideos(searchText, year) {
+  return videos[year].filter(v => v.game.toLowerCase().includes(searchText) || v.dev.toLowerCase().includes(searchText) || v.player.toLowerCase().includes(searchText) || v.alttext.toLowerCase().includes(searchText));
+}
+
 function searchVideos() {
-  if(this.value.length == 0) {
-    activeVideos = videos[activeYear];
+  //if(this.value.length < 3) return;
+  const s = this.value.toLowerCase();
+
+  if(activeYear == 'ALL') {
+    if(this.value.length == 0) {
+      videosContainer.innerHTML = searchHelpText;
+      return;
+    } else {
+      activeVideos = [];
+      marathonYears.forEach(year => {
+        activeVideos = [...activeVideos, ...filterVideos(s, year)];
+      });
+    }
   } else {
-    //if(this.value.length < 3) return;
-
-    const s = this.value.toLowerCase();
-    activeVideos = videos[activeYear].filter(v => v.game.toLowerCase().includes(s) || v.dev.toLowerCase().includes(s) || v.player.toLowerCase().includes(s) || v.alttext.toLowerCase().includes(s));
-
+    if(this.value.length == 0) {
+      activeVideos = videos[activeYear];
+    } else {
+      activeVideos = filterVideos(s, activeYear);
+    }
   }
+
   generateVideos(activeVideos);
 }
 
@@ -106,9 +123,13 @@ spoilers.addEventListener('click', function() {
 });
 
 yearSelect.forEach(selection => selection.addEventListener('click', function() {
-    console.log(selection.innerText);
     activeYear = selection.innerText;
     yearLabel.innerText = activeYear;
-    activeVideos = videos[activeYear];
-    generateVideos(activeVideos);
+
+    if(selection.innerText == 'ALL') {
+      videosContainer.innerHTML = searchHelpText;
+    } else {
+      activeVideos = videos[activeYear];
+      generateVideos(activeVideos);
+    }
   }));
