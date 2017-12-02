@@ -246,4 +246,5 @@ section article {
   width: 308px;
   height: 229px;
   background-size: cover;
-  background-position: center; }
+  background-position: center;
+  background-color: black; }
