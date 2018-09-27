@@ -27,11 +27,17 @@ $logo-font: $thick-font;
 $header-color: $site-color;
 $header-bg-color: $site-bg-color;
 
+$featured-video-title-color: $highlighter;
+
 $game-tile-color: $site-color;
 $game-tile-title-color: $highlighter;
 $game-tile-player-color: $highlighter;
 $game-tile-bg-color: $prettymuchblack;
 
+// Responsive
+$break-med: 1100px;
+$break-small: 1000px;
+$break-xsmall: 380px;
 
 html, body {
   width: 100%;
@@ -46,6 +52,9 @@ html {
 /* Utilities */
 .hidden {
   display:none;
+}
+.icon-xlarge {
+  height:64px;
 }
 .icon-large {
   height:32px;
@@ -128,9 +137,19 @@ header h1, .site-title {
   transform: translateX(15px) skewX(-30deg);
   background: $header-bg-color;
   /*box-shadow: 0 20px 0 #121212;*/
+
+  @media screen and (max-width: $break-small) {
+    -webkit-transform: translateX(15px) skewX(30deg);
+    transform: translateX(15px) skewX(30deg);
+  }
 }
 nav, nav select, nav form {
   // display: inline-block;
+  display: flex;
+
+  @media screen and (max-width: $break-small) {
+    display: block;
+  }
 }
 nav {
   /*margin-left: 75px;*/
@@ -147,6 +166,10 @@ select, input[type=submit] {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+
+  @media screen and (max-width: $break-small) {
+    width: 100%;
+  }
 }
 .nav-dropdown a {
   color: $header-color;
@@ -165,6 +188,10 @@ select, input[type=submit] {
   // padding: 0 10px;
   // height: 40px;
   margin-right: .5em;
+
+  @media screen and (max-width: $break-small) {
+    margin-right: 0;
+  }
 }
 .nav-dropdown li > a:after {
   font-size: 12px;
@@ -191,6 +218,12 @@ select, input[type=submit] {
   margin-right: 0;
   background:$logo-bg-color;
 }
+.nav-dropdown-tier2 {
+  @media screen and (max-width: $break-small) {
+    justify-content: space-around;
+    background:$logo-bg-color;
+  }
+}
 input.search {
   position: relative;
   top: 2px;
@@ -203,6 +236,10 @@ input.search {
   border-radius: 4px;*/
 
   background-color: #312525;
+
+  @media screen and (max-width: $break-small) {
+    width: 100%;
+  }
 }
 input, textarea {
   color: #747474;
@@ -240,6 +277,32 @@ header a {
   display: inline-block;
   background-color: #121212;*/
 }
+a.tooltip::before {
+    content: attr(data-tip) ;   
+     
+    position:absolute;
+    z-index: 999;
+    white-space:nowrap;
+    bottom:9999px;
+    /* left: 50%; */
+    background:$deepred;
+    color:$site-color;
+    padding:4px 4px;
+    line-height: 24px;
+    height: 24px;
+     
+    opacity: 0;  
+    transition:opacity 0.4s ease-out; 
+}
+     
+a.tooltip:hover::before {
+    opacity: 1;
+    bottom:-22px;
+
+    @media screen and (max-width: $break-small) {
+      opacity: 0;
+    }
+}
 
 input[type=text] {
   /*padding: 0;*/
@@ -256,22 +319,164 @@ input::placeholder {
   /*padding-left: 20px;*/
   /* font-size: 1.5em; */
 }
+.switch-videos-view {
+  width: 33px;
+  display: inline-block;
+  text-align: center;
+}
 
 /*Main section sytle*/
 
-section {
-  width: 90%;
+.site-content {
+  width: 100%;
   /*height: 100%; removed */
   margin: 50px auto;
   /*background-color: #000;*/
+
+  @media screen and (max-width: $break-small) {
+    margin: 110px auto;
+  }
 }
-section article {
+.site-content-nomenu {
+  width: 100%;
+  margin: 50px auto;
+}
+.videos-container {
+  width: 98%;
   height: 100%;
-  padding-top: 30px;
+  /*  padding-top: 30px */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
+
+  @media screen and (max-width: $break-small) {
+    /*  padding-top: 60px */
+    width: 100%;
+  }
+}
+
+.featured-container {
+  
+}
+.featured-video-container {
+  width: 100%;
+  height: 315px;
+  margin-bottom: .5em;
+  background-color: #050505;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: $break-med) {
+    height: auto;
+    padding-bottom: 1em;
+  }
+}
+.featured-video-container h1 {
+  font-size: 26px;
+  padding: .5em;
+  font-family: $logo-font;
+  color: $featured-video-title-color;
+  text-align: center;
+}
+
+.featured-article {
+  width: 500px;
+}
+.featured-search-shortcut {
+  margin: .5em;
+  margin-top: 60px;
+  padding: .25em;
+  background-color: $deepred;
+}
+.featured-article p {
+  margin: .5em 0;
+}
+.featured-article a {
+  color: $game-tile-title-color;
+  text-decoration: none;
+}
+.featured-smol {
+  font-size: .75em;
+  color: #aaa;
+}
+
+.featured-search-shortcut::before {
+  content: "Search Link";
+  margin-right: .5em;
+  color: $game-tile-title-color;
+  font-size: 1.15em;
+  font-weight: bold;
+}
+
+.stat-container {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+}
+
+.about-tile {
+  padding: 1em;
+  /*  margin: 60px auto */
+
+  color: $game-tile-color;
+  background-color: $game-tile-bg-color;
+}
+
+.about-tile h1 {
+  font-size: 1.5em;
+  margin: .5em 0;
+  font-family: $logo-font;
+}
+
+.about-tile p {
+  margin: .5em 0;
+}
+
+.about-link {
+  color: $game-tile-title-color;
+  text-decoration: none;
+}
+
+.about-link-lrg {
+  color: $game-tile-title-color;
+  font-size: 1.5em;
+  text-decoration: none;
+  font-family: $logo-font;
+}
+
+.stat-tile {
+  width: 45%;
+  padding: 1em;
+
+  color: $game-tile-color;
+  background-color: $game-tile-bg-color;
+}
+
+.stat-label {
+  font-family: $logo-font;
+  width: 15%;
+  display: inline-block;
+}
+.stat-list {
+  font-size: 1.5em;
+}
+.stat-list li {
+  padding: .5em 0;
+}
+.stat-bar {
+  width: 80%;
+  display: inline-block;
+  border: 3px solid white;
+}
+.stat-filled-bar {
+  width: 80%;
+  height: 1.25em;
+  display: inline-block;
+  background-color: white;
 }
 
 .game-tile {
@@ -351,4 +556,42 @@ section article {
 
 
   background-color: black;
+}
+
+.game-table {
+  width: 100%;
+
+  color: $game-tile-color;
+}
+
+.game-table tr {
+  border-bottom: 2px solid $site-bg-color;
+  background-color: $game-tile-bg-color;
+}
+.game-table tr:hover {
+  background-color: #462727;
+}
+
+.game-table td {
+  padding: .5em;
+}
+.game-table a{
+  color: $game-tile-title-color;
+  text-decoration: none;
+}
+.game-table-title {
+  color: $game-tile-title-color;
+  font-family: 'Yantramanav', sans-serif;
+  font-size: 1.15em;
+  font-weight: bold;
+
+  @media screen and (max-width: $break-small) {
+    font-size: .75em;
+  }
+}
+
+.hide-mobile {
+  @media screen and (max-width: $break-small) {
+    display: none;
+  }
 }
